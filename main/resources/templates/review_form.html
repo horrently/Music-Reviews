@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Write a Review - Music Reviews</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/styles.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 56px;
+        }
+        .rating {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 1em;
+        }
+        .rating input[type="radio"] {
+            display: none;
+        }
+        .rating label {
+            display: inline-block;
+            width: 2em;
+            height: 2em;
+            line-height: 2em;
+            border-radius: 50%;
+            background: #ddd;
+            text-align: center;
+            cursor: pointer;
+        }
+        .rating input[type="radio"]:checked + label,
+        .rating input[type="radio"]:hover + label {
+            background: #007bff;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="~{header :: header}"></div>
+<div class="container mt-4">
+    <h2>Написать рецензию на альбом <span th:text="${album.title}"></span></h2>
+    <div th:if="${reviewExists}">
+        <p>Вы уже оставили рецензию на этот альбом.</p>
+    </div>
+    <div th:unless="${reviewExists}">
+    <form th:action="@{/albums/{id}/reviews/save(id=${album.id})}" th:object="${review}" method="post">
+        <div class="form-group">
+            <label for="content">Содержание</label>
+            <textarea id="content" class="form-control" th:field="*{content}" rows="5"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="rating">Оценка</label>
+            <div class="rating">
+                <input type="radio" id="rating-1" name="rating" th:field="*{rating}" value="1">
+                <label for="rating-1">1</label>
+                <input type="radio" id="rating-2" name="rating" th:field="*{rating}" value="2">
+                <label for="rating-2">2</label>
+                <input type="radio" id="rating-3" name="rating" th:field="*{rating}" value="3">
+                <label for="rating-3">3</label>
+                <input type="radio" id="rating-4" name="rating" th:field="*{rating}" value="4">
+                <label for="rating-4">4</label>
+                <input type="radio" id="rating-5" name="rating" th:field="*{rating}" value="5">
+                <label for="rating-5">5</label>
+                <input type="radio" id="rating-6" name="rating" th:field="*{rating}" value="6">
+                <label for="rating-6">6</label>
+                <input type="radio" id="rating-7" name="rating" th:field="*{rating}" value="7">
+                <label for="rating-7">7</label>
+                <input type="radio" id="rating-8" name="rating" th:field="*{rating}" value="8">
+                <label for="rating-8">8</label>
+                <input type="radio" id="rating-9" name="rating" th:field="*{rating}" value="9">
+                <label for="rating-9">9</label>
+                <input type="radio" id="rating-10" name="rating" th:field="*{rating}" value="10">
+                <label for="rating-10">10</label>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Опубликовать рецензию</button>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
