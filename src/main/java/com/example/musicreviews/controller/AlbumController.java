@@ -69,8 +69,9 @@ public class AlbumController {
                 model.addAttribute("reviews", reviews != null ? reviews : new ArrayList<>());
             }
             return "album";
-        } else {
-            return "albumNotFound";
+        }
+        else {
+            return "error";
         }
     }
 
